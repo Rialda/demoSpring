@@ -8,7 +8,7 @@ public class FirstController {
 	
 	@RequestMapping("/")
 	public String welcome() {
-		return "Hello World!";
+		return "Hello World lalal!";
 	}
 	
 	 
