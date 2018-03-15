@@ -29,9 +29,9 @@
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="/register">Register</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Features</a>
+				<li class="nav-item"><a class="nav-link" href="/login">Sign in</a>
 				</li>
-				<li class="nav-item"><a class="nav-link" href="#">Features</a>
+				<li class="nav-item"><a class="nav-link" href="/show-users">User Details</a>
 				</li>
 
 			</ul>
@@ -39,11 +39,11 @@
 	</nav>
 
 
-		<div class="container">
-		<br/>
-	<c:choose>
+	<div class="container">
+		<br />
+		<c:choose>
 
-	<c:when test="${mode=='MODE_INDEX' }">
+			<c:when test="${mode=='MODE_INDEX' }">
 
 				<div class="jumbotron">
 					<h1>Hello from the other side!</h1>
@@ -98,14 +98,126 @@
 				<br />
 
 			</c:when>
+			<c:when test="${mode=='ALL_USERS' }">
+				<div class="container text-center" id="tasksDiv">
+					<h3>All Users</h3>
+					<hr>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>UserName</th>
+									<th>First Name</th>
+									<th>LastName</th>
+									<th>Age</th>
+									<th>Delete</th>
+									<th>Edit</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="user" items="${users }">
+									<tr>
+										<td>${user.id}</td>
+										<td>${user.username}</td>
+										<td>${user.firstname}</td>
+										<td>${user.lastname}</td>
+										<td>${user.age}</td>
+										<td><a href="/delete-user?id=${user.id }"><span>DELETE</span></a></td>
+										<td><a href="/edit-user?id=${user.id }"><span>EDIT</span></a></td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</c:when>
+
+			<c:when test="${mode=='MODE_UPDATE' }">
+				<div class="container text-center">
+					<h3>Update User</h3>
+					<hr>
+					<form class="form-horizontal" method="POST" action="save-user">
+						<input type="hidden" name="id" value="${user.id }" />
+						<div class="form-group">
+							<label class="control-label col-md-3">Username</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control" name="username"
+									value="${user.username }" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">First Name</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control" name="firstname"
+									value="${user.firstname }" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Last Name</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control" name="lastname"
+									value="${user.lastname }" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Age </label>
+							<div class="col-md-3">
+								<input type="text" class="form-control" name="age"
+									value="${user.age }" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Password</label>
+							<div class="col-md-7">
+								<input type="password" class="form-control" name="password"
+									value="${user.password }" />
+							</div>
+						</div>
+						<div class="form-group ">
+							<input type="submit" class="btn btn-primary" value="Update" />
+						</div>
+					</form>
+				</div>
+			</c:when>
+
+			<c:when test="${mode=='MODE_LOGIN' }">
+				<div class="container text-center">
+					<h3>User Login</h3>
+					<hr>
+					<form class="form-horizontal" method="POST" action="/login-user">
+						<c:if test="${not empty error }">
+							<div class="alert alert-danger">
+								<c:out value="${error }"></c:out>
+							</div>
+						</c:if>
+						<div class="form-group">
+							<label class="control-label col-md-3">Username</label>
+							<div class="col-md-7">
+								<input type="text" class="form-control" name="username"
+									value="${user.username }" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-md-3">Password</label>
+							<div class="col-md-7">
+								<input type="password" class="form-control" name="password"
+									value="${user.password }" />
+							</div>
+						</div>
+						<div class="form-group ">
+							<input type="submit" class="btn btn-primary" value="Login" />
+						</div>
+					</form>
+				</div>
+			</c:when>
 
 
 
+		</c:choose>
 
-	</c:choose>
-
-		</div>
-		<!-- /container  -->
+	</div>
+	<!-- /container  -->
 
 
 	<script src="static/js/jquery-1.11.1.min.js"></script>

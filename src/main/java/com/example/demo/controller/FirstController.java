@@ -48,7 +48,7 @@ public class FirstController {
 	public String showAllUsers(HttpServletRequest request) {
 		request.setAttribute("users", userService.showAllUsers());
 		request.setAttribute("mode", "ALL_USERS");
-		return "welcomepage";
+		return "landing_page";
 	}
 
 	@RequestMapping("/delete-user")
@@ -56,30 +56,30 @@ public class FirstController {
 		userService.deleteMyUser(id);
 		request.setAttribute("users", userService.showAllUsers());
 		request.setAttribute("mode", "ALL_USERS");
-		return "welcomepage";
+		return "landing_page";
 	}
 
 	@RequestMapping("/edit-user")
 	public String editUser(@RequestParam int id, HttpServletRequest request) {
 		request.setAttribute("user", userService.editUser(id));
 		request.setAttribute("mode", "MODE_UPDATE");
-		return "welcomepage";
+		return "landing_page";
 	}
 
 	@RequestMapping("/login")
 	public String login(HttpServletRequest request) {
 		request.setAttribute("mode", "MODE_LOGIN");
-		return "welcomepage";
+		return "landing_page";
 	}
 
 	@RequestMapping("/login-user")
 	public String loginUser(@ModelAttribute User user, HttpServletRequest request) {
 		if (userService.findByUsernameAndPassword(user.getUsername(), user.getPassword()) != null) {
-			return "homepage";
+			return "home";
 		} else {
 			request.setAttribute("error", "Invalid Username or Password");
 			request.setAttribute("mode", "MODE_LOGIN");
-			return "welcomepage";
+			return "landing_page";
 
 		}
 	}
