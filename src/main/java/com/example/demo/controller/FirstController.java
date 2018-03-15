@@ -1,10 +1,11 @@
 package com.example.demo.controller;
 
+
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class FirstController {
 	
 	@ResponseBody
@@ -13,7 +14,7 @@ public class FirstController {
 		return "Hello World!";
 	}
 	
-	@RequestMapping("/index")
+	@RequestMapping("/landing_page")
 	public String landingPage() {
 		return "landing_page";
 	}
