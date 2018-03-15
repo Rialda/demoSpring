@@ -75,11 +75,10 @@ public class FirstController {
 	@RequestMapping("/login-user")
 	public String loginUser(@ModelAttribute User user, HttpServletRequest request) {
 		if (userService.findByUsernameAndPassword(user.getUsername(), user.getPassword()) != null) {
-			return "home";
-		} else {
-			request.setAttribute("error", "Invalid Username or Password");
-			request.setAttribute("mode", "MODE_LOGIN");
 			return "landing_page";
+		} else {
+			request.setAttribute("mode", "MODE_LOGIN");
+			return "nopath";
 
 		}
 	}

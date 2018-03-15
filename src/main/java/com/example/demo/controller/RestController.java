@@ -23,7 +23,7 @@ public class RestController {
 	public String saveUser(@RequestParam String username, @RequestParam String firstname, @RequestParam String lastname, @RequestParam int age, @RequestParam String password) {
 		User user = new User(username, firstname, lastname, age, password);
 		userService.saveMyUser(user);
-		return "User Saved";
+		return "Noticed!";
 }
 	
 	
