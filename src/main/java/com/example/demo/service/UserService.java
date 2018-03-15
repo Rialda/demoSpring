@@ -1,17 +1,50 @@
 package com.example.demo.service;
-/*
+
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.model.User;
+import javax.transaction.Transactional;
 
-public interface UserService {
+import org.springframework.stereotype.Service;
+
+import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
+
+@Service
+@Transactional
+public class UserService {
 	
-	List<User> userList();
+	private final UserRepository userRepository;
 	
-	Optional<User> findOne(Long id);
-	void addUser (User user);
-	String deleteUser(Long id);
+	public UserService(UserRepository userRepository) {
+		this.userRepository=userRepository;
+	}
+	
+	public void saveMyUser(User user ) {
+		userRepository.save(user);
+	}
+	
+	public List<User> showAllUsers(){
+		List<User> users = new ArrayList<User>();
+		for(User user : userRepository.findAll()) {
+			users.add(user);
+		}
+		
+		return users;
+	}
+	
+	public void deleteMyUser(int id) {
+		userRepository.deleteById(id);
+	}
+	
+	public Optional<User> editUser(int id) {
+		return userRepository.findById(id);
+	}
+	
+	public User findByUsernameAndPassword(String username, String password) {
+		return userRepository.findByUsernameAndPassword(username, password);
+	}
 	
 }
-*/
